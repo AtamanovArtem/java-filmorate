@@ -129,7 +129,7 @@ class FilmorateApplicationTests {
 		Collection<Film> films = filmController.findAll();
 		assertEquals("newName", updatedFilm.getName());
 		assertEquals("description2", updatedFilm.getDescription());
-		assertEquals(85 , updatedFilm.getDuration());
+		assertEquals(85, updatedFilm.getDuration());
 		assertEquals(LocalDate.of(2010, 12, 2), updatedFilm.getReleaseDate());
 		assertTrue(films.contains(updatedFilm));
 	}
@@ -215,7 +215,7 @@ class FilmorateApplicationTests {
 		assertEquals("description22222222222222222222222222222222222222222222222222222222222222222222222222222" +
 				"222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222" +
 				"2222222222", updatedFilm.getDescription());
-		assertEquals(85 , updatedFilm.getDuration());
+		assertEquals(85, updatedFilm.getDuration());
 		assertEquals(LocalDate.of(2010, 12, 2), updatedFilm.getReleaseDate());
 		assertTrue(films.contains(updatedFilm));
 	}
@@ -248,7 +248,7 @@ class FilmorateApplicationTests {
 		Collection<Film> films = filmController.findAll();
 		assertEquals("newName", updatedFilm.getName());
 		assertEquals("description2", updatedFilm.getDescription());
-		assertEquals(100 , updatedFilm.getDuration());
+		assertEquals(100, updatedFilm.getDuration());
 		assertEquals(LocalDate.of(1895, 12, 28), updatedFilm.getReleaseDate());
 		assertTrue(films.contains(updatedFilm));
 	}
