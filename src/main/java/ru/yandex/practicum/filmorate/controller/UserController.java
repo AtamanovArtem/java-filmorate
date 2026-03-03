@@ -61,9 +61,9 @@ public class UserController {
 		return ++currentMaxId;
 	}
 
-	@PutMapping("/{id}")
-	public User update(@PathVariable int id, @RequestBody User newUser) {
-		User currentUser = users.get(id);
+	@PutMapping
+	public User update(@RequestBody User newUser) {
+		User currentUser = users.get(newUser.getId());
 		if (currentUser == null) {
 			log.warn("Пользователь с указанным id не найден");
 			throw new ValidationException("Пользователь с указанным id не найден");
@@ -93,7 +93,7 @@ public class UserController {
 		}
 		currentUser.setBirthday(newUser.getBirthday());
 
-		log.info("Пользователь с ID {} успешно обновлен", id);
+		log.info("Пользователь с ID {} успешно обновлен", newUser.getId());
 		return currentUser;
 	}
 }

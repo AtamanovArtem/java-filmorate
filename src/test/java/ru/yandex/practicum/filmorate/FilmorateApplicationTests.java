@@ -72,10 +72,10 @@ class FilmorateApplicationTests {
 		FilmController filmController = new FilmController();
 		Film film1 = new Film(1, "name1", "description1",
 				LocalDate.of(2020, 12, 2), 100);
-		filmController.create(film1.getId(), film1);
+		filmController.create(film1);
 		Film film2 = new Film(2, "name2", "description2",
 				LocalDate.of(2000, 12, 2), 200);
-		filmController.create(film2.getId(), film2);
+		filmController.create(film2);
 
 		Collection<Film> films = filmController.findAll();
 		assertEquals(2, films.size());
@@ -106,7 +106,7 @@ class FilmorateApplicationTests {
 				.releaseDate(LocalDate.of(1991, 12, 1))
 				.duration(90)
 				.build();
-		Film createdFilm = filmController.create(film.getId(), film);
+		Film createdFilm = filmController.create(film);
 		Collection<Film> films = filmController.findAll();
 		assertNotNull(createdFilm);
 		assertEquals("name1", createdFilm.getName());
@@ -124,8 +124,8 @@ class FilmorateApplicationTests {
 				LocalDate.of(2020, 12, 2), 100);
 		Film newFilm = new Film(1, "newName", "description2",
 				LocalDate.of(2010, 12, 2), 85);
-		filmController.create(film1.getId(), film1);
-		Film updatedFilm = filmController.update(1, newFilm);
+		filmController.create(film1);
+		Film updatedFilm = filmController.update(newFilm);
 		Collection<Film> films = filmController.findAll();
 		assertEquals("newName", updatedFilm.getName());
 		assertEquals("description2", updatedFilm.getDescription());
@@ -144,7 +144,7 @@ class FilmorateApplicationTests {
 				.releaseDate(LocalDate.of(1895, 12, 28))
 				.duration(90)
 				.build();
-		Film createdFilm = filmController.create(film.getId(), film);
+		Film createdFilm = filmController.create(film);
 		Collection<Film> films = filmController.findAll();
 		assertNotNull(createdFilm);
 		assertEquals("name1", createdFilm.getName());
@@ -160,13 +160,13 @@ class FilmorateApplicationTests {
 
 		Film film1 = new Film(1, "name1", "description1",
 				LocalDate.of(2020, 12, 2), 100);
-		filmController.create(film1.getId(), film1);
+		filmController.create(film1);
 
 		Film newFilm = new Film(1, "", "description2",
 				LocalDate.of(2010, 12, 2), 85);
 
 		assertThrows(ValidationException.class, () -> {
-			filmController.update(1, newFilm);
+			filmController.update(newFilm);
 		});
 	}
 
@@ -177,7 +177,7 @@ class FilmorateApplicationTests {
 				LocalDate.of(2010, 12, 2), 85);
 
 		assertThrows(ValidationException.class, () -> {
-			filmController.create(newFilm.getId(), newFilm);
+			filmController.create(newFilm);
 		});
 	}
 
@@ -186,7 +186,7 @@ class FilmorateApplicationTests {
 		FilmController filmController = new FilmController();
 		Film film = new Film(1, "name1", "description1",
 				LocalDate.of(2002, 12, 2), 90);
-		filmController.create(film.getId(), film);
+		filmController.create(film);
 
 		Film newFilm = new Film(1, "newName", "description2333333333333333333333333333333333333333" +
 				"33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333" +
@@ -194,7 +194,7 @@ class FilmorateApplicationTests {
 				LocalDate.of(2010, 12, 2), 85);
 
 		assertThrows(ValidationException.class, () -> {
-			filmController.update(1, newFilm);
+			filmController.update(newFilm);
 		});
 	}
 
@@ -203,13 +203,13 @@ class FilmorateApplicationTests {
 		FilmController filmController = new FilmController();
 		Film film = new Film(1, "name1", "description1",
 				LocalDate.of(2002, 12, 2), 90);
-		filmController.create(film.getId(), film);
+		filmController.create(film);
 
 		Film newFilm = new Film(1, "newName", "description22222222222222222222222222222222222222222" +
 				"22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222" +
 				"22222222222222222222222222222222222222222222222",
 				LocalDate.of(2010, 12, 2), 85);
-		Film updatedFilm = filmController.update(1, newFilm);
+		Film updatedFilm = filmController.update(newFilm);
 		Collection<Film> films = filmController.findAll();
 		assertEquals("newName", updatedFilm.getName());
 		assertEquals("description22222222222222222222222222222222222222222222222222222222222222222222222222222" +
@@ -225,13 +225,13 @@ class FilmorateApplicationTests {
 		FilmController filmController = new FilmController();
 		Film film = new Film(1, "name1", "description1",
 				LocalDate.of(2002, 12, 2), 90);
-		filmController.create(film.getId(), film);
+		filmController.create(film);
 
 		Film newFilm = new Film(1, "newName", "description2",
 				LocalDate.of(2010, 12, 2), -1);
 
 		assertThrows(ValidationException.class, () -> {
-			filmController.update(1, newFilm);
+			filmController.update(newFilm);
 		});
 	}
 
@@ -240,11 +240,11 @@ class FilmorateApplicationTests {
 		FilmController filmController = new FilmController();
 		Film film = new Film(1, "name1", "description1",
 				LocalDate.of(2002, 12, 2), 90);
-		filmController.create(film.getId(), film);
+		filmController.create(film);
 
 		Film newFilm = new Film(1, "newName", "description2",
 				LocalDate.of(1895, 12, 28), 100);
-		Film updatedFilm = filmController.update(1, newFilm);
+		Film updatedFilm = filmController.update(newFilm);
 		Collection<Film> films = filmController.findAll();
 		assertEquals("newName", updatedFilm.getName());
 		assertEquals("description2", updatedFilm.getDescription());
@@ -262,7 +262,7 @@ class FilmorateApplicationTests {
 				LocalDate.of(2010, 12, 2), 85);
 
 		assertThrows(ValidationException.class, () -> {
-			filmController.create(newFilm.getId(), newFilm);
+			filmController.create(newFilm);
 		});
 	}
 
@@ -273,7 +273,7 @@ class FilmorateApplicationTests {
 				LocalDate.of(2010, 12, 2), 0);
 
 		assertThrows(ValidationException.class, () -> {
-			filmController.create(newFilm.getId(), newFilm);
+			filmController.create(newFilm);
 		});
 	}
 
@@ -366,29 +366,24 @@ class FilmorateApplicationTests {
 	@Test
 	public void testUpdateUserEmailToNull() {
 		UserController controller = new UserController();
-		User user1 = User.builder()
+		User user = User.builder()
 				.email("user1@example.com")
 				.login("login1")
 				.name("Name1")
 				.birthday(LocalDate.of(1990, 1, 1))
 				.build();
-		User created1 = controller.create(user1);
-		int id1 = created1.getId();
-		User user2 = User.builder()
-				.email("user2@example.com")
+		User createdUser = controller.create(user);
+		User updateData = User.builder()
+				.id(createdUser.getId())
+				.email("")
 				.login("login2")
 				.name("Name2")
-				.birthday(LocalDate.of(1995, 2, 2))
-				.build();
-		User created2 = controller.create(user2);
-		int id2 = created2.getId();
-		User updateData = User.builder()
-				.email(" ")
+				.birthday(LocalDate.of(1995, 1, 1))
 				.build();
 		ValidationException exception = assertThrows(ValidationException.class, () -> {
-			controller.update(id1, updateData);
+			controller.update(updateData);
 		});
-		assertTrue(exception.getMessage().contains("Email должен содержать @ и не должен быть пустым"));
+		assertEquals("Email должен содержать @ и не должен быть пустым", exception.getMessage());
 	}
 
 	@Test
@@ -414,7 +409,7 @@ class FilmorateApplicationTests {
 				.birthday(LocalDate.now().plusDays(1))
 				.build();
 		assertThrows(ValidationException.class, () -> {
-			controller.update(id1, updateData);
+			controller.update(updateData);
 		});
 	}
 
@@ -422,6 +417,7 @@ class FilmorateApplicationTests {
 	public void testUpdateUserNameToEmptyString() {
 		UserController controller = new UserController();
 		User user = User.builder()
+				.id(1)
 				.email("test@example.com")
 				.login("login")
 				.name("Original")
@@ -429,12 +425,13 @@ class FilmorateApplicationTests {
 				.build();
 		int userId = controller.create(user).getId();
 		User updateData = User.builder()
+				.id(1)
 				.email("test1@example.com")
 				.login("newLogin")
 				.name("")
 				.birthday(LocalDate.of(1995, 12, 1))
 				.build();
-		User updated = controller.update(userId, updateData);
+		User updated = controller.update(updateData);
 		assertEquals("newLogin", updated.getName());
 	}
 
@@ -442,6 +439,7 @@ class FilmorateApplicationTests {
 	public void testUpdateUserNameToOtherName() {
 		UserController controller = new UserController();
 		User user = User.builder()
+				.id(1)
 				.email("test@example.com")
 				.login("login")
 				.name("Original")
@@ -449,12 +447,13 @@ class FilmorateApplicationTests {
 				.build();
 		int userId = controller.create(user).getId();
 		User updateData = User.builder()
+				.id(1)
 				.email("test1@example.com")
 				.login("login1")
 				.name("newName")
 				.birthday(LocalDate.of(1995, 12, 10))
 				.build();
-		User updated = controller.update(userId, updateData);
+		User updated = controller.update(updateData);
 		assertEquals("newName", updated.getName());
 	}
 }

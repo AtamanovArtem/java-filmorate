@@ -22,7 +22,7 @@ public class FilmController {
 	}
 
 	@PostMapping
-	public Film create(int id, @RequestBody Film film) {
+	public Film create(@RequestBody Film film) {
 		if (film.getName() == null || film.getName().isBlank()) {
 			log.error("Название фильма не может быть пустым!");
 			throw new ValidationException("Название фильма не может быть пустым!");
@@ -54,11 +54,11 @@ public class FilmController {
 		return ++currentMaxId;
 	}
 
-	@PutMapping("/{id}")
-	public Film update(@PathVariable Integer id, @RequestBody Film newFilm) {
-		Film currentFilm = films.get(id);
+	@PutMapping
+	public Film update(@RequestBody Film newFilm) {
+		Film currentFilm = films.get(newFilm.getId());
 		if (currentFilm == null) {
-			log.error("Фильм с ID " + id + " не найден");
+			log.error("Фильм с ID " + newFilm.getId() + " не найден");
 			throw new ValidationException("Фильм с указанным id не найден");
 		}
 		if (newFilm.getName() == null || newFilm.getName().isBlank()) {
@@ -83,7 +83,7 @@ public class FilmController {
 			throw new ValidationException("Продолжительность фильма должна быть положительным числом");
 		}
 		currentFilm.setDuration(newFilm.getDuration());
-		log.info("Фильм с ID " + id + " успешно обновлен");
+		log.info("Фильм с ID " + newFilm.getId() + " успешно обновлен");
 		return currentFilm;
 	}
 }
