@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.service.UserService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +18,16 @@ import java.util.Map;
 @RequestMapping("/users")
 public class UserController {
 	private final Map<Integer, User> users = new HashMap<>();
+	private final UserService userService;
+
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
+
+
+
+
+
 
 	@GetMapping
 	public Collection<User> findAll() {
