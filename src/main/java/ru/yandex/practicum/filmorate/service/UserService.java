@@ -18,7 +18,6 @@ public class UserService {
 	private final UserStorage userStorage;
 	private final Map<Long, Set<Long>> userFriends = new HashMap<>();
 
-	@Autowired
 	public UserService(UserStorage userStorage) {
 		this.userStorage = userStorage;
 	}

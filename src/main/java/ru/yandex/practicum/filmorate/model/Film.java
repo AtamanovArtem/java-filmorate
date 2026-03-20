@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class Film {
-	private long id;
+	private Long id;
 	private String name;
 	private String description;
 	private LocalDate releaseDate;

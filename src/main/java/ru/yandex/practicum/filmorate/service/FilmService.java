@@ -19,8 +19,9 @@ public class FilmService {
 	private final FilmStorage filmStorage;
 	private final UserStorage userStorage;
 	private final Map<Long, Set<Long>> filmLikes = new HashMap<>();
+	private final Integer maxDescription = 200;
+	private final LocalDate dateOfBeginning = LocalDate.of(1895, 12, 28);
 
-	@Autowired
 	public FilmService(FilmStorage filmStorage, UserStorage userStorage) {
 		this.filmStorage = filmStorage;
 		this.userStorage = userStorage;
@@ -92,11 +93,11 @@ public class FilmService {
 			log.error("Название фильма не может быть пустым!");
 			throw new ValidationException("Название фильма не может быть пустым!");
 		}
-		if (film.getDescription() != null && film.getDescription().length() > 200) {
+		if (film.getDescription() != null && film.getDescription().length() > maxDescription) {
 			log.error("Описание фильма не должно превышать 200 символов и не может быть пустым!");
 			throw new ValidationException("Описание фильма не должно превышать 200 символов");
 		}
-		if (film.getReleaseDate().isBefore(LocalDate.of(1895, 12, 28))) {
+		if (film.getReleaseDate().isBefore(dateOfBeginning)) {
 			log.error("Дата релиза фильма не может быть раньше 28.12.1895");
 			throw new ValidationException("Дата релиза фильма не может быть раньше 28.12.1895");
 		}
